@@ -1,0 +1,12 @@
+type StoreConfig {
+  code: String
+  store_name: String
+}
+
+type Query {
+  storeConfig: StoreConfig
+}
+
+schema {
+  query: Query
+}

@@ -6,22 +6,11 @@
   "author": "root",
   "license": "UNLICENSED",
   "scripts": {
-    "buildpack": "buildpack",
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider && yarn run build:prod",
-    "build:analyze": "yarn run clean && mkdir dist && webpack -p --profile --no-progress --env.mode production --json > dist/build-stats.json && webpack-bundle-analyzer dist/build-stats.json",
-    "build:dev": "yarn run clean && webpack --no-progress --env.mode development",
-    "build:prod": "yarn run clean && webpack --no-progress --env.mode production",
-    "build:report": "buildpack generate-build-report",
-    "clean": "rimraf dist",
-    "lint": "eslint --ignore-path .gitignore 'src/**/{*.js,package.json}'",
-    "prettier": "prettier --loglevel warn --ignore-path .gitignore 'src/**/*.@(css|graphql|js)' '*.js'",
-    "prettier:check": "yarn run -s prettier -- --check",
-    "prettier:fix": "yarn run -s prettier -- --write",
-    "start": "buildpack serve .",
-    "start:debug": "node --inspect-brk ./node_modules/.bin/webpack-dev-server --progress --color --env.mode development",
-    "watch": "webpack-dev-server --progress --color --env.mode development",
-    "storybook": "start-storybook -p 9001 -c src/.storybook",
-    "storybook:build": "build-storybook -c src/.storybook -o storybook-dist"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "schema:download": "node scripts/download-schema.mjs",
+    "codegen": "graphql-codegen --config graphql/codegen.yml"
   },
   "main": "src/index.js",
   "browser": {
@@ -30,7 +19,13 @@
   "dependencies": {
     "@magento/experience-platform-connector": "~1.0.12",
     "@magento/pwa-buildpack": "~11.5.3",
-    "dompurify": "~3.2.4"
+    "dompurify": "~3.2.4",
+    "next": "^15.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "graphql-request": "^7.1.2",
+    "graphql": "^16.10.0",
+    "@graphql-typed-document-node/core": "^3.2.0"
   },
   "devDependencies": {
     "@adobe/apollo-link-mutation-queue": "~1.0.2",
@@ -52,10 +47,11 @@
     "@magento/peregrine": "~15.7.2",
     "@magento/pwa-theme-venia": "~2.4.0",
     "@magento/upward-security-headers": "~1.1.20",
+    "@magento/venia-sample-backends": "~0.0.1",
     "@magento/venia-ui": "~11.7.2",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.1",
     "@storybook/react": "~6.3.7",
-    "@types/node": "16",
+    "@types/node": "^22.10.2",
     "apollo-cache-persist": "~0.1.1",
     "babel-core": "~7.0.0-bridge.0",
     "babel-eslint": "~10.1.0",
@@ -69,7 +65,7 @@
     "compression": "~1.7.4",
     "css-loader": "~5.2.7",
     "dotenv": "~6.2.0",
-    "eslint": "~7.32.0",
+    "eslint": "^9.17.0",
     "eslint-plugin-babel": "~5.3.0",
     "eslint-plugin-graphql": "~4.0.0",
     "eslint-plugin-jsx-a11y": "~6.4.1",
@@ -126,7 +122,14 @@
     "workbox-routing": "~6.2.4",
     "workbox-strategies": "~6.2.4",
     "workbox-webpack-plugin": "~6.2.4",
-    "@magento/venia-sample-backends": "~0.0.1"
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.1.2",
+    "@graphql-codegen/typescript-operations": "^4.4.0",
+    "@graphql-codegen/typed-document-node": "^5.0.13",
+    "typescript": "^5.7.3",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "eslint-config-next": "^15.2.0"
   },
   "optionalDependencies": {
     "sharp": "~0.29.3"
