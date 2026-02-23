@@ -1,1 +1,3 @@
-module.exports = { presets: ['@magento/peregrine'] };
+module.exports = {
+  presets: ['next/babel']
+};
